@@ -11,14 +11,17 @@ int main(int argc, char *argv[]) {
     // Make a socket to listen for client connections.
     TCPServerSocket servSock(8080);
 	cout << "server running: " << servSock.getLocalAddress().getAddress() << endl;
-    for (;;) {                          // Repeatedly accept connections
+
+    // Repeatedly accept connections
+    for (;;) {
 		TCPSocket *sock = servSock.accept(); // Get next client connection
 		cout << "connection accepted " << sock->getForeignAddress().getAddress() << endl;
 		handleConnection(sock);
 
     }
   } catch (SocketException &e) {
-    cerr << e.what() << endl;           // Report errors to the console
+	  // Report errors to the console
+    cerr << e.what() << endl;
   }
 
   return 0;
